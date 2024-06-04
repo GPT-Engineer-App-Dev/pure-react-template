@@ -108,3 +108,10 @@ export const useDeleteDrink = () => {
         },
     });
 };
+
+// Function to list all tables
+export const listTables = async () => {
+    const { data, error } = await supabase.from('pg_tables').select('tablename');
+    if (error) throw new Error(error.message);
+    return data;
+};
