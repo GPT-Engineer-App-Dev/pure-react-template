@@ -9,7 +9,8 @@ const Index = () => {
           <Flex justify="space-between" align="center">
             <Text fontSize="xl" fontWeight="bold">My Website</Text>
             <Flex>
-              <Link href="#" mx={2} color="white">Home</Link>
+              <Link href="/" mx={2} color="white">Home</Link>
+              <Link href="/animals" mx={2} color="white">Animals</Link>
               <Link href="#" mx={2} color="white">About</Link>
               <Link href="#" mx={2} color="white">Contact</Link>
             </Flex>

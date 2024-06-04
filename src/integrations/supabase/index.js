@@ -35,6 +35,14 @@ Drinks // table: drinks
     percentage: number
     country: string
 
+Animals // table: animals
+    id: number
+    created_at: string
+    name: string
+    species: string
+    age: number
+    habitat: string
+
 */
 
 // Hooks for Dishes table
@@ -105,6 +113,42 @@ export const useDeleteDrink = () => {
         mutationFn: (id) => fromSupabase(supabase.from('drinks').delete().eq('id', id)),
         onSuccess: () => {
             queryClient.invalidateQueries('drinks');
+        },
+    });
+};
+
+// Hooks for Animals table
+export const useAnimals = () => useQuery({
+    queryKey: ['animals'],
+    queryFn: () => fromSupabase(supabase.from('animals').select('*')),
+});
+
+export const useAddAnimal = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (newAnimal) => fromSupabase(supabase.from('animals').insert([newAnimal])),
+        onSuccess: () => {
+            queryClient.invalidateQueries('animals');
+        },
+    });
+};
+
+export const useUpdateAnimal = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (updatedAnimal) => fromSupabase(supabase.from('animals').update(updatedAnimal).eq('id', updatedAnimal.id)),
+        onSuccess: () => {
+            queryClient.invalidateQueries('animals');
+        },
+    });
+};
+
+export const useDeleteAnimal = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (id) => fromSupabase(supabase.from('animals').delete().eq('id', id)),
+        onSuccess: () => {
+            queryClient.invalidateQueries('animals');
         },
     });
 };
