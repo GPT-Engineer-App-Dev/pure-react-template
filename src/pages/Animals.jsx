@@ -8,7 +8,7 @@ const Animals = () => {
   const updateAnimalMutation = useUpdateAnimal();
   const deleteAnimalMutation = useDeleteAnimal();
 
-  const [newAnimal, setNewAnimal] = useState({ name: '', species: '', age: '', habitat: '' });
+  const [newAnimal, setNewAnimal] = useState({ name: '', type: '', size: '', country_of_origin: '', average_lifetime: '' });
   const [editingAnimal, setEditingAnimal] = useState(null);
 
   const handleChange = (e) => {
@@ -18,7 +18,7 @@ const Animals = () => {
 
   const handleAddAnimal = () => {
     addAnimalMutation.mutate(newAnimal);
-    setNewAnimal({ name: '', species: '', age: '', habitat: '' });
+    setNewAnimal({ name: '', type: '', size: '', country_of_origin: '', average_lifetime: '' });
   };
 
   const handleUpdateAnimal = (animal) => {
@@ -41,16 +41,20 @@ const Animals = () => {
           <Input name="name" value={newAnimal.name} onChange={handleChange} />
         </FormControl>
         <FormControl>
-          <FormLabel>Species</FormLabel>
-          <Input name="species" value={newAnimal.species} onChange={handleChange} />
+          <FormLabel>Type</FormLabel>
+          <Input name="type" value={newAnimal.type} onChange={handleChange} />
         </FormControl>
         <FormControl>
-          <FormLabel>Age</FormLabel>
-          <Input name="age" value={newAnimal.age} onChange={handleChange} />
+          <FormLabel>Size</FormLabel>
+          <Input name="size" value={newAnimal.size} onChange={handleChange} />
         </FormControl>
         <FormControl>
-          <FormLabel>Habitat</FormLabel>
-          <Input name="habitat" value={newAnimal.habitat} onChange={handleChange} />
+          <FormLabel>Country of Origin</FormLabel>
+          <Input name="country_of_origin" value={newAnimal.country_of_origin} onChange={handleChange} />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Average Lifetime</FormLabel>
+          <Input name="average_lifetime" value={newAnimal.average_lifetime} onChange={handleChange} />
         </FormControl>
         <Button onClick={handleAddAnimal}>Add Animal</Button>
 
@@ -65,19 +69,24 @@ const Animals = () => {
                     onChange={(e) => setEditingAnimal({ ...animal, name: e.target.value })}
                   />
                   <Input
-                    name="species"
-                    value={animal.species}
-                    onChange={(e) => setEditingAnimal({ ...animal, species: e.target.value })}
+                    name="type"
+                    value={animal.type}
+                    onChange={(e) => setEditingAnimal({ ...animal, type: e.target.value })}
                   />
                   <Input
-                    name="age"
-                    value={animal.age}
-                    onChange={(e) => setEditingAnimal({ ...animal, age: e.target.value })}
+                    name="size"
+                    value={animal.size}
+                    onChange={(e) => setEditingAnimal({ ...animal, size: e.target.value })}
                   />
                   <Input
-                    name="habitat"
-                    value={animal.habitat}
-                    onChange={(e) => setEditingAnimal({ ...animal, habitat: e.target.value })}
+                    name="country_of_origin"
+                    value={animal.country_of_origin}
+                    onChange={(e) => setEditingAnimal({ ...animal, country_of_origin: e.target.value })}
+                  />
+                  <Input
+                    name="average_lifetime"
+                    value={animal.average_lifetime}
+                    onChange={(e) => setEditingAnimal({ ...animal, average_lifetime: e.target.value })}
                   />
                   <Button onClick={() => handleUpdateAnimal(editingAnimal)}>Save</Button>
                   <Button onClick={() => setEditingAnimal(null)}>Cancel</Button>
@@ -85,9 +94,10 @@ const Animals = () => {
               ) : (
                 <>
                   <Text>{animal.name}</Text>
-                  <Text>{animal.species}</Text>
-                  <Text>{animal.age}</Text>
-                  <Text>{animal.habitat}</Text>
+                  <Text>{animal.type}</Text>
+                  <Text>{animal.size}</Text>
+                  <Text>{animal.country_of_origin}</Text>
+                  <Text>{animal.average_lifetime}</Text>
                   <Button onClick={() => setEditingAnimal(animal.id)}>Edit</Button>
                   <Button onClick={() => handleDeleteAnimal(animal.id)}>Delete</Button>
                 </>
